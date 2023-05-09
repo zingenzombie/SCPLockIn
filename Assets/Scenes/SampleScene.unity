@@ -160,7 +160,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d469d02104cec4ccba133b553cef7c7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraSpeed: 3
+  CameraSpeed: 10
+  ScrollWheelIntensity: 3
+  HeightBounds: {x: 22, y: 100}
+  HeightAdjustSpeed: 0.2
 --- !u!114 &364541703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,8 +230,8 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
-  orthographic: 1
+  field of view: 62.8
+  orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
