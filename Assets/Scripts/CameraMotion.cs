@@ -2,45 +2,14 @@ using UnityEngine;
 
 public class CameraMotion : MonoBehaviour
 {
-    private float horizontal;
-    private float zoom;
-    private float hSpeed = 0, vSpeed = 0;
-    private float speedMax = 25;
-    private float vertical;
+    [SerializeField] private float CameraSpeed = 0.0f;
 
-    [SerializeField] private Rigidbody2D rb;
 
-     void Start() {
-        
-    }
+    void FixedUpdate(){
 
-    void Update()
-    {
-        horizontal = Input.GetAxisRaw("Horizontal");
-        vertical = Input.GetAxisRaw("Vertical");
+        float xVar = Input.GetAxis("Horizontal") * CameraSpeed * Time.deltaTime;
+        float yVar = Input.GetAxis("Vertical") * CameraSpeed * Time.deltaTime;
 
-        if(horizontal != 0){
-            hSpeed += (float) .05;
-        }
-        else{
-            hSpeed = 0;
-        }
-
-        if(vertical != 0){
-            vSpeed += (float) .05;
-        }
-        else{
-            vSpeed = 0;
-        }
-
-        if(hSpeed > speedMax || vSpeed > speedMax){
-            hSpeed = speedMax;
-            vSpeed = speedMax;
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        rb.velocity = new Vector2(horizontal * hSpeed, vertical * vSpeed);
+        transform.position += new Vector3(xVar, yVar);
     }
 }
