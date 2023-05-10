@@ -18,7 +18,7 @@ public class PointerScript : MonoBehaviour
     {
         _horizontalMovement = new Vector3(0f, 0f, -Input.GetAxis("Horizontal"));
 
-        transform.Rotate(_horizontalMovement * _rotationSpeed * Time.deltaTime);
+        //transform.Rotate(_horizontalMovement * _rotationSpeed * Time.deltaTime);
 
         if (Input.GetKey(KeyCode.Space) == Input.GetKey(KeyCode.Space))
         {
