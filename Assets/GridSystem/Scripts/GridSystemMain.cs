@@ -10,6 +10,8 @@ public class GridSystemMain : MonoBehaviour
 
     public GameObject TileParent;
 
+    public Color32 SelectionColor = Color.white;
+
     void Start(){
         for(int i = 0; i < GridSize.x; i++){
             for(int j = 0; j < GridSize.y; j++){

@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 178ce58ca4c1bd544b1a07149d3f639f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ControlFunctions: {fileID: 6275197266504790476}
 --- !u!61 &-629307787209366541
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -138,3 +139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3563488493a5f7741bd62c9307274591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originalColor:
+    serializedVersion: 2
+    rgba: 0
+  GridSystem: {fileID: 0}
+  clickRemoveTime: 2.5
