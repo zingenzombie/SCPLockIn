@@ -12,14 +12,14 @@ public class GridSystemMain : MonoBehaviour
 
     public Color32 SelectionColor = Color.white;
 
-    void Start(){
+    void Awake(){
         for(int i = 0; i < GridSize.x; i++){
             for(int j = 0; j < GridSize.y; j++){
                 Instantiate(GrassTile, new Vector3(i, j, 0), Quaternion.identity, TileParent.transform);
             }
         }
 
-        Camera.main.transform.position = new Vector3(GridSize.x / 2.0f, GridSize.y / 2.0f, -75);
+        Camera.main.transform.position = new Vector3(GridSize.x / 2.0f, GridSize.y / 2.0f, Camera.main.transform.position.z);
     }
 
     void Update(){
