@@ -11,4 +11,6 @@ public class TileRandomColor : MonoBehaviour
         SpriteRenderer renderer = GetComponent<SpriteRenderer>();
         renderer.color = Color32.Lerp(Green1, Green2, Random.Range(0.0f, 1.0f));
     }
+
+    
 }
