@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18103115, g: 0.22660115, b: 0.3072812, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -153,12 +153,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GridSize: {x: 80, y: 80}
-  GrassTile: {fileID: 5528315779332660488, guid: 0500fe89e81dc844aadc00b3e8b55d3f,
+  GrassTile: {fileID: 1161193669156480688, guid: b2541450d9531a041aa585c129f937e8,
     type: 3}
   TileParent: {fileID: 1324817405}
   SelectionColor:
     serializedVersion: 2
-    rgba: 4291100927
+    rgba: 4294967295
 --- !u!4 &558727345
 Transform:
   m_ObjectHideFlags: 0
@@ -282,14 +282,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1218337140}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.87677264, y: -0.11665023, z: 0.26763812, w: 0.3821419}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 132.9, y: -33.95, z: 0}
 --- !u!1 &1324817405
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,7 +421,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ZoomIntensity: 2.5
   ZoomBounds: {x: 5, y: 120}
-  MoveSpeed: 20
+  MoveSpeed: 30
 --- !u!114 &1377987230
 MonoBehaviour:
   m_ObjectHideFlags: 0

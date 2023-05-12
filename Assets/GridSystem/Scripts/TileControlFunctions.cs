@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class TileControlFunctions : MonoBehaviour
 {
+    private MeshRenderer Renderer;
 
-    public Color32 originalColor;
-    private SpriteRenderer Renderer;
+    private Color32 originalColor;
 
     public GridSystemMain GridSystem;
 
@@ -16,13 +16,14 @@ public class TileControlFunctions : MonoBehaviour
 
     void Start(){
 
-        Renderer = transform.GetComponent<SpriteRenderer>();
+        Renderer = transform.GetComponent<MeshRenderer>();
+        originalColor = Renderer.material.color;
         GridSystem = GameObject.Find("GridSystem").transform.GetComponent<GridSystemMain>();
 
     }
     void OnMouseOver(){
         if(Input.GetKeyDown(KeyCode.Mouse0)){
-            Renderer.color = GridSystem.SelectionColor;
+            Renderer.material.color = GridSystem.SelectionColor;
             clicked = true;
             StartCoroutine(offclick());
         }
@@ -35,15 +36,15 @@ public class TileControlFunctions : MonoBehaviour
             yield return null;
         }
         clicked = false;
-        Renderer.color = originalColor;
+        Renderer.material.color = originalColor;
     }
 
     void OnMouseEnter(){
-            Renderer.color = GridSystem.SelectionColor;
+           Renderer.material.color = GridSystem.SelectionColor;
     }
 
     void OnMouseExit(){
             if(!clicked)
-            Renderer.color = originalColor;
+            Renderer.material.color = originalColor;
     }
 }

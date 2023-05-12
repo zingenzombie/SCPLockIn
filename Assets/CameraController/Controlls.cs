@@ -25,8 +25,8 @@ public class Controlls : MonoBehaviour
     {
         //adding in camera scrolling
         ZoomVar -= Input.mouseScrollDelta.y * ZoomIntensity;
-        xVar -= Input.GetAxis("Horizontal") * MoveSpeed * Time.deltaTime;
-        yVar += Input.GetAxis("Vertical") * MoveSpeed * Time.deltaTime;
+        xVar -= Input.GetAxisRaw("Horizontal") * MoveSpeed * Time.deltaTime;
+        yVar += Input.GetAxisRaw("Vertical") * MoveSpeed * Time.deltaTime;
 
         ZoomVar = Mathf.Clamp(ZoomVar, 7.5f, 110f);
 
