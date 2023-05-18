@@ -14,6 +14,8 @@ public class TileControlFunctions : MonoBehaviour
 
     public float clickRemoveTime = 2.5f;
 
+    public GameObject wall;
+
     void Start(){
 
         Renderer = transform.GetComponent<MeshRenderer>();
@@ -23,6 +25,9 @@ public class TileControlFunctions : MonoBehaviour
     }
     void OnMouseOver(){
         if(Input.GetKeyDown(KeyCode.Mouse0)){
+            
+            Instantiate(wall, transform.position, Quaternion.identity);
+
             Renderer.material.color = GridSystem.SelectionColor;
             clicked = true;
             StartCoroutine(offclick());
