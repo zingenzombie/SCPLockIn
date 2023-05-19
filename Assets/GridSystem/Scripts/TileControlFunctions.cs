@@ -8,6 +8,8 @@ public class TileControlFunctions : MonoBehaviour
 
     private Color32 originalColor;
 
+    private bool BlockPlaced = false;
+
     public GridSystemMain GridSystem;
 
     private bool clicked = false;
@@ -15,6 +17,8 @@ public class TileControlFunctions : MonoBehaviour
     public float clickRemoveTime = 2.5f;
 
     public GameObject wall;
+
+    public GameObject Block;
 
     void Start(){
 
@@ -24,13 +28,31 @@ public class TileControlFunctions : MonoBehaviour
 
     }
     void OnMouseOver(){
-        if(Input.GetKeyDown(KeyCode.Mouse0)){
+        if(Input.GetMouseButton(0)){
+            if(!BlockPlaced){
+
+            BlockPlaced = true;
             
-            Instantiate(wall, transform.position, Quaternion.identity);
+            Block = Instantiate(wall, transform.position, Quaternion.identity);
 
             Renderer.material.color = GridSystem.SelectionColor;
             clicked = true;
             StartCoroutine(offclick());
+
+            }
+        }
+        else if(Input.GetMouseButton(1)){
+            if(BlockPlaced){
+
+            BlockPlaced = false;
+            
+            Destroy(Block);
+
+            Renderer.material.color = GridSystem.SelectionColor;
+            clicked = true;
+            StartCoroutine(offclick());
+
+            }
         }
     }
 
