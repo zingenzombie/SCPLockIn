@@ -4,18 +4,27 @@ using UnityEngine;
 
 public class GridSystemMain : MonoBehaviour
 {
-    [SerializeField] private Vector2 GridSize;
+    [SerializeField] private Vector2Int GridSize;
 
     public GameObject GrassTile;
 
     public GameObject TileParent;
 
+    public GameObject[,] TheGrid;
+
     public Color32 SelectionColor = Color.white;
 
     void Awake(){
+        TheGrid = new GameObject[GridSize.x, GridSize.y];
+
         for(int i = 0; i < GridSize.x; i++){
             for(int j = 0; j < GridSize.y; j++){
-                Instantiate(GrassTile, new Vector3(i, j, 0), Quaternion.identity, TileParent.transform);
+                
+                TheGrid[i,j] = Instantiate(GrassTile, new Vector3(i, j, 0), Quaternion.identity, TileParent.transform);
+
+                TheGrid[i,j].transform.GetChild(0).GetComponent<TileControlFunctions>().SetCoordsAndGrid(new Vector2Int(i, j));
+                
+                Debug.Log(i + ", " + j + " block created.");
             }
         }
 
@@ -28,7 +37,7 @@ public class GridSystemMain : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if(Physics.Raycast(ray, out hit)){
-            Debug.Log(hit.transform.name);
+            //Debug.Log(hit.transform.name);
         }
 
     }

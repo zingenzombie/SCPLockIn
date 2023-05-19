@@ -8,7 +8,9 @@ public class TileControlFunctions : MonoBehaviour
 
     private Color32 originalColor;
 
-    private bool BlockPlaced = false;
+    public Vector2Int Coords;
+
+    public bool BlockPlaced = false;
 
     public GridSystemMain GridSystem;
 
@@ -16,7 +18,7 @@ public class TileControlFunctions : MonoBehaviour
 
     public float clickRemoveTime = 2.5f;
 
-    public GameObject wall;
+    public GameObject[] Blocks;
 
     public GameObject Block;
 
@@ -27,13 +29,20 @@ public class TileControlFunctions : MonoBehaviour
         GridSystem = GameObject.Find("GridSystem").transform.GetComponent<GridSystemMain>();
 
     }
+
+    public void SetCoordsAndGrid(Vector2Int coords){
+        Coords = coords;
+    }
+
     void OnMouseOver(){
         if(Input.GetMouseButton(0)){
             if(!BlockPlaced){
 
             BlockPlaced = true;
             
-            Block = Instantiate(wall, transform.position, Quaternion.identity);
+            Block = Instantiate(Blocks[0], transform.position, Quaternion.identity);
+            Block.GetComponent<WallScript>().SetCoordsAndGrid(Coords);
+            Block.GetComponent<WallScript>().CheckNear();
 
             Renderer.material.color = GridSystem.SelectionColor;
             clicked = true;
@@ -44,16 +53,33 @@ public class TileControlFunctions : MonoBehaviour
         else if(Input.GetMouseButton(1)){
             if(BlockPlaced){
 
-            BlockPlaced = false;
-            
-            Destroy(Block);
+                BlockPlaced = false;
+                
+                Destroy(Block);
+                UpdateNearbyTiles();
 
-            Renderer.material.color = GridSystem.SelectionColor;
-            clicked = true;
-            StartCoroutine(offclick());
+                Renderer.material.color = GridSystem.SelectionColor;
+                clicked = true;
+                StartCoroutine(offclick());
 
             }
         }
+    }
+
+    void UpdateNearbyTiles(){
+        GameObject[,] TheGrid = GameObject.Find("GridSystem").GetComponent<GridSystemMain>().TheGrid;
+        try{
+        TheGrid[Coords.x, Coords.y + 1].transform.GetChild(0).GetComponent<TileControlFunctions>().Block.GetComponent<WallScript>().CheckNear();
+        }catch{}
+        try{
+        TheGrid[Coords.x, Coords.y - 1].transform.GetChild(0).GetComponent<TileControlFunctions>().Block.GetComponent<WallScript>().CheckNear();
+        }catch{}
+        try{
+        TheGrid[Coords.x - 1, Coords.y].transform.GetChild(0).GetComponent<TileControlFunctions>().Block.GetComponent<WallScript>().CheckNear();
+        }catch{}
+        try{
+        TheGrid[Coords.x + 1, Coords.y].transform.GetChild(0).GetComponent<TileControlFunctions>().Block.GetComponent<WallScript>().CheckNear();
+        }catch{}
     }
 
     private IEnumerator offclick(){

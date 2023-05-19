@@ -145,4 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GridSystem: {fileID: 0}
   clickRemoveTime: 2.5
-  wall: {fileID: 3882245125731334366, guid: 6c0a025c98111c3468ac0bce37226426, type: 3}
+  Blocks:
+  - {fileID: 3882245125731334366, guid: 6c0a025c98111c3468ac0bce37226426, type: 3}
+  - {fileID: 0}
+  Block: {fileID: 0}
