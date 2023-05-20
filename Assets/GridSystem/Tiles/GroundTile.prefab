@@ -143,9 +143,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3563488493a5f7741bd62c9307274591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Coords: {x: 0, y: 0}
+  BlockPlaced: 0
   GridSystem: {fileID: 0}
   clickRemoveTime: 2.5
   Blocks:
-  - {fileID: 3882245125731334366, guid: 6c0a025c98111c3468ac0bce37226426, type: 3}
+  - {fileID: 8133832898275487966, guid: 677ac2bbdd905b14ab19df0084e4e482, type: 3}
   - {fileID: 0}
   Block: {fileID: 0}

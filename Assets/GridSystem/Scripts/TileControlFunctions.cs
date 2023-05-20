@@ -43,8 +43,8 @@ public class TileControlFunctions : MonoBehaviour
             if(!BlockPlaced){
 
             BlockPlaced = true;
-            
-            Block = Instantiate(Blocks[0], transform.position, Quaternion.identity);
+            Block = Instantiate(Blocks[0], transform.position, /*Quaternion.identity*/ Quaternion.Euler(90, 0, 0));
+
             Block.GetComponent<WallScript>().SetCoordsAndGrid(Coords, ref TheGrid);
             Block.GetComponent<WallScript>().CheckNear();
 

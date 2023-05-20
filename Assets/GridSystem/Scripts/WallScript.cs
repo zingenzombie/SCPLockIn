@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WallScript : MonoBehaviour
@@ -16,6 +17,8 @@ public class WallScript : MonoBehaviour
     private Vector2Int[] Offsets = new Vector2Int[4];
 
     private GameObject[,] TheGrid;
+
+    public GameObject[] DirectionMod;
 
     // Start is called before the first frame update
     void Awake()
@@ -46,11 +49,14 @@ public class WallScript : MonoBehaviour
             try{
                 if(TheGrid[Coords.x + Offsets[i].x, Coords.y + Offsets[i].y].transform.GetChild(0).GetComponent<TileControlFunctions>().BlockPlaced != NSEW[i]){
                     NSEW[i] = !NSEW[i];
+
+                    DirectionMod[i].active = !DirectionMod[i].active;
+
                     if(!TheGrid[Coords.x + Offsets[i].x, Coords.y + Offsets[i].y].transform.GetChild(0).GetComponent<TileControlFunctions>().Block.GetComponent<WallScript>().Updating){
                         TheGrid[Coords.x + Offsets[i].x, Coords.y + Offsets[i].y].transform.GetChild(0).GetComponent<TileControlFunctions>().Block.GetComponent<WallScript>().CheckNear();
                     }
                 }
-            }catch{}
+            }catch{ /*this.transform.GetChild(i).active = false; */}
 
         }
 

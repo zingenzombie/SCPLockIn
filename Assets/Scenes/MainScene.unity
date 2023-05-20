@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dd3ea873d7e94549894f55fa326be35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GridSize: {x: 10, y: 10}
+  GridSize: {x: 100, y: 100}
   GrassTile: {fileID: 1161193669156480688, guid: b2541450d9531a041aa585c129f937e8,
     type: 3}
   TileParent: {fileID: 1324817405}
