@@ -3,12 +3,13 @@ Shader "Examples/Stencil"
     Properties
     {
 		[IntRange] _StencilID ("Stencil ID", Range(0, 255)) = 0
+		_Fade("Fade", Range(0,1)) = 1
     }
 	SubShader
     {
         Tags 
 		{ 
-			"RenderType" = "Opaque"
+			"RenderType" = "Transparent"
 			"Queue" = "Geometry"
 			"RenderPipeline" = "UniversalPipeline"
 		}
