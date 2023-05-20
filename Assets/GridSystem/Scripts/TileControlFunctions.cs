@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class TileControlFunctions : MonoBehaviour
@@ -24,6 +25,10 @@ public class TileControlFunctions : MonoBehaviour
 
     private GameObject[,] TheGrid;
 
+    public AudioClip[] SoundPlacedNoises;
+
+    private System.Random SoundPlacedRandom = new System.Random();
+
     void Start(){
 
         Renderer = transform.GetComponent<MeshRenderer>();
@@ -38,19 +43,31 @@ public class TileControlFunctions : MonoBehaviour
         this.TheGrid = TheGrid;
     }
 
+    void PlaySoundPlaced()
+    {
+        AudioSource audio = GetComponent<AudioSource>();
+
+        audio.clip = SoundPlacedNoises[SoundPlacedRandom.Next(SoundPlacedNoises.Length)];
+
+        audio.Play();
+    }
+
     void OnMouseOver(){
         if(Input.GetMouseButton(0)){
             if(!BlockPlaced){
 
-            BlockPlaced = true;
-            Block = Instantiate(Blocks[0], transform.position, /*Quaternion.identity*/ Quaternion.Euler(90, 0, 0));
+                BlockPlaced = true;
 
-            Block.GetComponent<WallScript>().SetCoordsAndGrid(Coords, ref TheGrid);
-            Block.GetComponent<WallScript>().CheckNear();
+                PlaySoundPlaced();
 
-            Renderer.material.color = GridSystem.SelectionColor;
-            clicked = true;
-            StartCoroutine(offclick());
+                Block = Instantiate(Blocks[0], transform.position, /*Quaternion.identity*/ Quaternion.Euler(90, 0, 0));
+
+                Block.GetComponent<WallScript>().SetCoordsAndGrid(Coords, ref TheGrid);
+                Block.GetComponent<WallScript>().CheckNear();
+
+                Renderer.material.color = GridSystem.SelectionColor;
+                clicked = true;
+                StartCoroutine(offclick());
 
             }
         }
