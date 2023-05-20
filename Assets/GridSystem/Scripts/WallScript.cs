@@ -14,7 +14,9 @@ public class WallScript : MonoBehaviour
     public bool Updating = false;
 
     private Vector2Int[] Offsets = new Vector2Int[4];
-    
+
+    private GameObject[,] TheGrid;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -29,20 +31,20 @@ public class WallScript : MonoBehaviour
         Offsets[3] = new Vector2Int(1,0);
     }
 
-    public void SetCoordsAndGrid(Vector2Int coords){
+    public void SetCoordsAndGrid(Vector2Int coords, ref GameObject[,] TheGrid)
+    {
         Coords = coords;
+        this.TheGrid = TheGrid;
     }
 
+    //This function is called to update the visual representation of the block when updated.
     public void CheckNear(){
 
         Updating = true;
-        
-        GameObject[,] TheGrid = GameObject.Find("GridSystem").GetComponent<GridSystemMain>().TheGrid;
 
         for(int i = 0; i < 4; i++){
             try{
-                bool status = TheGrid[Coords.x + Offsets[i].x, Coords.y + Offsets[i].y].transform.GetChild(0).GetComponent<TileControlFunctions>().BlockPlaced;
-                if(status != NSEW[i]){
+                if(TheGrid[Coords.x + Offsets[i].x, Coords.y + Offsets[i].y].transform.GetChild(0).GetComponent<TileControlFunctions>().BlockPlaced != NSEW[i]){
                     NSEW[i] = !NSEW[i];
                     if(!TheGrid[Coords.x + Offsets[i].x, Coords.y + Offsets[i].y].transform.GetChild(0).GetComponent<TileControlFunctions>().Block.GetComponent<WallScript>().Updating){
                         TheGrid[Coords.x + Offsets[i].x, Coords.y + Offsets[i].y].transform.GetChild(0).GetComponent<TileControlFunctions>().Block.GetComponent<WallScript>().CheckNear();

@@ -22,6 +22,8 @@ public class TileControlFunctions : MonoBehaviour
 
     public GameObject Block;
 
+    private GameObject[,] TheGrid;
+
     void Start(){
 
         Renderer = transform.GetComponent<MeshRenderer>();
@@ -30,8 +32,10 @@ public class TileControlFunctions : MonoBehaviour
 
     }
 
-    public void SetCoordsAndGrid(Vector2Int coords){
+    public void SetCoordsAndGrid(Vector2Int coords, ref GameObject[,] TheGrid)
+    {
         Coords = coords;
+        this.TheGrid = TheGrid;
     }
 
     void OnMouseOver(){
@@ -41,7 +45,7 @@ public class TileControlFunctions : MonoBehaviour
             BlockPlaced = true;
             
             Block = Instantiate(Blocks[0], transform.position, Quaternion.identity);
-            Block.GetComponent<WallScript>().SetCoordsAndGrid(Coords);
+            Block.GetComponent<WallScript>().SetCoordsAndGrid(Coords, ref TheGrid);
             Block.GetComponent<WallScript>().CheckNear();
 
             Renderer.material.color = GridSystem.SelectionColor;
@@ -67,7 +71,6 @@ public class TileControlFunctions : MonoBehaviour
     }
 
     void UpdateNearbyTiles(){
-        GameObject[,] TheGrid = GameObject.Find("GridSystem").GetComponent<GridSystemMain>().TheGrid;
         try{
         TheGrid[Coords.x, Coords.y + 1].transform.GetChild(0).GetComponent<TileControlFunctions>().Block.GetComponent<WallScript>().CheckNear();
         }catch{}

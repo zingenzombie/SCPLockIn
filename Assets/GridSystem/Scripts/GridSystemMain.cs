@@ -10,7 +10,7 @@ public class GridSystemMain : MonoBehaviour
 
     public GameObject TileParent;
 
-    public GameObject[,] TheGrid;
+    private GameObject[,] TheGrid;
 
     public Color32 SelectionColor = Color.white;
 
@@ -22,7 +22,7 @@ public class GridSystemMain : MonoBehaviour
                 
                 TheGrid[i,j] = Instantiate(GrassTile, new Vector3(i, j, 0), Quaternion.identity, TileParent.transform);
 
-                TheGrid[i,j].transform.GetChild(0).GetComponent<TileControlFunctions>().SetCoordsAndGrid(new Vector2Int(i, j));
+                TheGrid[i,j].transform.GetChild(0).GetComponent<TileControlFunctions>().SetCoordsAndGrid(new Vector2Int(i, j), ref TheGrid);
                 
                 Debug.Log(i + ", " + j + " block created.");
             }
