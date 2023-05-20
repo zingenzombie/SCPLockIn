@@ -47,12 +47,6 @@ public class TileControlFunctions : MonoBehaviour
             Block = Instantiate(Blocks[0], transform.position, Quaternion.identity);
             Block.GetComponent<WallScript>().SetCoordsAndGrid(Coords, ref TheGrid);
             Block.GetComponent<WallScript>().CheckNear();
-
-            Renderer.material.color = GridSystem.SelectionColor;
-            clicked = true;
-            StartCoroutine(offclick());
-
-            }
         }
         else if(Input.GetMouseButton(1)){
             if(BlockPlaced){
@@ -61,13 +55,9 @@ public class TileControlFunctions : MonoBehaviour
                 
                 Destroy(Block);
                 UpdateNearbyTiles();
-
-                Renderer.material.color = GridSystem.SelectionColor;
-                clicked = true;
-                StartCoroutine(offclick());
-
             }
         }
+    }
     }
 
     void UpdateNearbyTiles(){
@@ -83,24 +73,5 @@ public class TileControlFunctions : MonoBehaviour
         try{
         TheGrid[Coords.x + 1, Coords.y].transform.GetChild(0).GetComponent<TileControlFunctions>().Block.GetComponent<WallScript>().CheckNear();
         }catch{}
-    }
-
-    private IEnumerator offclick(){
-        var timeTemp = clickRemoveTime;
-        while(timeTemp >= 0){
-            timeTemp -= Time.deltaTime;
-            yield return null;
-        }
-        clicked = false;
-        Renderer.material.color = originalColor;
-    }
-
-    void OnMouseEnter(){
-           Renderer.material.color = GridSystem.SelectionColor;
-    }
-
-    void OnMouseExit(){
-            if(!clicked)
-            Renderer.material.color = originalColor;
     }
 }
