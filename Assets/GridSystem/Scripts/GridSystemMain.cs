@@ -112,13 +112,16 @@ public class GridSystemMain : MonoBehaviour
             try
             {
 
-                TheGrid[x, y].GetComponent<TileControlFunctions>().NSEW_Walls[i].active = 
-                    TheGrid[x + Offsets[i].x, y + Offsets[i].y].GetComponent<TileControlFunctions>().BlockPlaced;
 
-                if (!TheGrid[x + Offsets[i].x, y + Offsets[i].y].GetComponent<TileControlFunctions>().Updating)
+                if (!TheGrid[x + Offsets[i].x, y + Offsets[i].y].GetComponent<TileControlFunctions>().Updating &&
+                    TheGrid[x, y].GetComponent<TileControlFunctions>().NSEW_Walls[i].active !=
+                    TheGrid[x + Offsets[i].x, y + Offsets[i].y].GetComponent<TileControlFunctions>().BlockPlaced)
                 {
                     CheckNearSurroundings(x + Offsets[i].x, y + Offsets[i].y);
                 }
+
+                TheGrid[x, y].GetComponent<TileControlFunctions>().NSEW_Walls[i].active =
+                    TheGrid[x + Offsets[i].x, y + Offsets[i].y].GetComponent<TileControlFunctions>().BlockPlaced;
             }
             catch { TheGrid[x, y].GetComponent<TileControlFunctions>().NSEW_Walls[i].active = false; }
 

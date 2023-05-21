@@ -421,6 +421,9 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1024
+  Updating: 0
+  NSEW: 
+  BlockPlaced: 1
 --- !u!82 &3882549487271829868
 AudioSource:
   m_ObjectHideFlags: 0
@@ -428,7 +431,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8133832898275487966}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}

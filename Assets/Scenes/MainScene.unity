@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dd3ea873d7e94549894f55fa326be35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GridSize: {x: 11, y: 11}
+  GridSize: {x: 500, y: 500}
   GridGround: {fileID: 297432773}
   selectionTile: {fileID: 340857687}
   Wall: {fileID: 8133832898275487966, guid: 677ac2bbdd905b14ab19df0084e4e482, type: 3}
