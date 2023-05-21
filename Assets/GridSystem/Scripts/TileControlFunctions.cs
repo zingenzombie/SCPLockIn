@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class TileControlFunctions : MonoBehaviour
@@ -24,6 +25,10 @@ public class TileControlFunctions : MonoBehaviour
 
     private GameObject[,] TheGrid;
 
+    public AudioClip[] SoundPlacedNoises;
+
+    private System.Random SoundPlacedRandom = new System.Random();
+
     void Start(){
 
         Renderer = transform.GetComponent<MeshRenderer>();
@@ -36,6 +41,15 @@ public class TileControlFunctions : MonoBehaviour
     {
         Coords = coords;
         this.TheGrid = TheGrid;
+    }
+
+    void PlaySoundPlaced()
+    {
+        AudioSource audio = GetComponent<AudioSource>();
+
+        audio.clip = SoundPlacedNoises[SoundPlacedRandom.Next(SoundPlacedNoises.Length)];
+
+        audio.Play();
     }
 
     void OnMouseOver(){
