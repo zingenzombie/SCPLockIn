@@ -4,39 +4,26 @@ using UnityEngine;
 
 public class GridSystemMain : MonoBehaviour
 {
-    [SerializeField] private Vector2Int GridSize;
+    [SerializeField] private Vector2 GridSize;
 
     public GameObject GridGround;
 
     public GameObject selectionTile;
 
-    private Dictionary<Vector2, GameObject> TileLocations;
+    private Vector3 currentSelectedTileLocation;
+    private float xPoint, yPoint;
+
+    public GameObject Wall;
 
     void Awake()
     {
-
         var Renderer = GridGround.GetComponent<MeshRenderer>();
         Renderer.material.SetVector("_Tiles", new Vector4(GridSize.x, GridSize.y, 0, 0));
         GridGround.transform.localScale = new Vector3(GridSize.x / 10, 1, GridSize.y / 10);
 
         Camera.main.transform.position = new Vector3(GridGround.transform.position.x, Camera.main.transform.position.z, GridGround.transform.position.y);
-
-        for(int i = 0; i < GridSize.x; i++){
-            for(int j = 0; j < GridSize.y; j++){
-
-                //TileLocations.Add(new Vector2(i, j), Instantiate()
-
-                Debug.Log(i + ", " + j + " block created.");
-            }
-        }
     }
 
-    private Vector3 currentSelectedTileLocation;
-    private float xPoint, yPoint;
-    void Update()
-    {
-        
-    }
 
     void FixedUpdate(){
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -63,5 +50,10 @@ public class GridSystemMain : MonoBehaviour
     private void ChangeSelection(){
         selectionTile.SetActive(true);
         selectionTile.transform.position = new Vector3(xPoint, 0, yPoint);
+    }
+
+    public void PlaceWall(){
+        var obj = Instantiate(Wall, new Vector3(xPoint, 0, yPoint), Quaternion.identity);
+        obj.GetComponent<TileControlFunctions>().InitObj();
     }
 }

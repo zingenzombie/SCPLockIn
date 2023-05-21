@@ -5,42 +5,18 @@ using UnityEngine;
 
 public class TileControlFunctions : MonoBehaviour
 {
-    private MeshRenderer Renderer;
 
-    private Color32 originalColor;
-
-    public Vector2Int Coords;
-
-    public bool BlockPlaced = false;
-
-    public GridSystemMain GridSystem;
-
-    private bool clicked = false;
-
-    public float clickRemoveTime = 2.5f;
-
-    public GameObject[] Blocks;
-
-    public GameObject Block;
-
-    private GameObject[,] TheGrid;
+    [SerializeField]
+    public GameObject[] NSEW_Walls;
 
     public AudioClip[] SoundPlacedNoises;
 
     private System.Random SoundPlacedRandom = new System.Random();
 
-    void Start(){
+    public LayerMask layerMask;
 
-        Renderer = transform.GetComponent<MeshRenderer>();
-        originalColor = Renderer.material.color;
-        GridSystem = GameObject.Find("GridSystem").transform.GetComponent<GridSystemMain>();
-
-    }
-
-    public void SetCoordsAndGrid(Vector2Int coords, ref GameObject[,] TheGrid)
-    {
-        Coords = coords;
-        this.TheGrid = TheGrid;
+    public void InitObj(){
+        CheckNearSurroundings();
     }
 
     void PlaySoundPlaced()
@@ -52,40 +28,37 @@ public class TileControlFunctions : MonoBehaviour
         audio.Play();
     }
 
-    void OnMouseOver(){
-        if(Input.GetMouseButton(0)){
-            if(!BlockPlaced){
+    
+    private void CheckNearSurroundings(){
+        var HorizontalObjs = Physics.OverlapBox(transform.position, new Vector3(1f, 1f, .2f), Quaternion.identity, layerMask);
+        var VerticalObjs = Physics.OverlapBox(transform.position, new Vector3(.2f, 1f, 1f), Quaternion.identity, layerMask);
 
-            BlockPlaced = true;
-            
-            Block = Instantiate(Blocks[0], transform.position, Quaternion.identity);
-            Block.GetComponent<WallScript>().SetCoordsAndGrid(Coords, ref TheGrid);
-            Block.GetComponent<WallScript>().CheckNear();
-        }
-        else if(Input.GetMouseButton(1)){
-            if(BlockPlaced){
-
-                BlockPlaced = false;
-                
-                Destroy(Block);
-                UpdateNearbyTiles();
+        foreach(var obj in HorizontalObjs){
+            if(obj != this){
+                var objController = obj.transform.parent.GetComponent<TileControlFunctions>();
+            if(obj.transform.position.x - transform.position.x < 0){
+                NSEW_Walls[2].SetActive(true);
+                objController.NSEW_Walls[3].SetActive(true);
+            }
+            else if(obj.transform.position.x - transform.position.x > 0){
+                NSEW_Walls[3].SetActive(true);
+                objController.NSEW_Walls[2].SetActive(true);
+            }
             }
         }
-    }
-    }
 
-    void UpdateNearbyTiles(){
-        try{
-        TheGrid[Coords.x, Coords.y + 1].transform.GetChild(0).GetComponent<TileControlFunctions>().Block.GetComponent<WallScript>().CheckNear();
-        }catch{}
-        try{
-        TheGrid[Coords.x, Coords.y - 1].transform.GetChild(0).GetComponent<TileControlFunctions>().Block.GetComponent<WallScript>().CheckNear();
-        }catch{}
-        try{
-        TheGrid[Coords.x - 1, Coords.y].transform.GetChild(0).GetComponent<TileControlFunctions>().Block.GetComponent<WallScript>().CheckNear();
-        }catch{}
-        try{
-        TheGrid[Coords.x + 1, Coords.y].transform.GetChild(0).GetComponent<TileControlFunctions>().Block.GetComponent<WallScript>().CheckNear();
-        }catch{}
+        foreach(var obj in VerticalObjs){
+            if(obj != this){
+                var objController = obj.transform.parent.GetComponent<TileControlFunctions>();
+            if(obj.transform.position.z - transform.position.z < 0){
+                NSEW_Walls[0].SetActive(true);
+                objController.NSEW_Walls[1].SetActive(true);
+            }
+            else if(obj.transform.position.z - transform.position.z > 0){
+                NSEW_Walls[1].SetActive(true);
+                objController.NSEW_Walls[0].SetActive(true);
+            }
+            }
+        }
     }
 }
