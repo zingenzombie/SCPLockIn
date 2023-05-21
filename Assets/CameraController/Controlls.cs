@@ -30,6 +30,6 @@ public class Controlls : MonoBehaviour
 
         ZoomVar = Mathf.Clamp(ZoomVar, 7.5f, 110f);
 
-        transform.position = new Vector3(xVar, yVar, ZoomVar);
+        transform.position = new Vector3(-xVar, ZoomVar, yVar);
     }
 }
