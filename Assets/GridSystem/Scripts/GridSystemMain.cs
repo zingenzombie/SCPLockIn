@@ -20,15 +20,6 @@ public class GridSystemMain : MonoBehaviour
         GridGround.transform.localScale = new Vector3(GridSize.x / 10, 1, GridSize.y / 10);
 
         Camera.main.transform.position = new Vector3(GridGround.transform.position.x, Camera.main.transform.position.z, GridGround.transform.position.y);
-
-        for(int i = 0; i < GridSize.x; i++){
-            for(int j = 0; j < GridSize.y; j++){
-
-                //TileLocations.Add(new Vector2(i, j), Instantiate()
-
-                Debug.Log(i + ", " + j + " block created.");
-            }
-        }
     }
 
     private Vector3 currentSelectedTileLocation;

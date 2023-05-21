@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dd3ea873d7e94549894f55fa326be35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GridSize: {x: 200, y: 500}
+  GridSize: {x: 60, y: 100}
   GridGround: {fileID: 297432773}
   selectionTile: {fileID: 340857687}
 --- !u!4 &49562627
@@ -582,7 +582,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ZoomIntensity: 2.5
-  ZoomBounds: {x: 5, y: 120}
+  ZoomBounds: {x: 5, y: 2000}
   MoveSpeed: 30
 --- !u!114 &1377987230
 MonoBehaviour:

@@ -28,7 +28,7 @@ public class Controlls : MonoBehaviour
         xVar -= Input.GetAxisRaw("Horizontal") * MoveSpeed * Time.deltaTime;
         yVar += Input.GetAxisRaw("Vertical") * MoveSpeed * Time.deltaTime;
 
-        ZoomVar = Mathf.Clamp(ZoomVar, 7.5f, 110f);
+        ZoomVar = Mathf.Clamp(ZoomVar, ZoomBounds.x, ZoomBounds.y);
 
         transform.position = new Vector3(-xVar, ZoomVar, yVar);
     }
