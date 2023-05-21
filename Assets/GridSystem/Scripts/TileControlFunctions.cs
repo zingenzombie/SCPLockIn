@@ -15,8 +15,33 @@ public class TileControlFunctions : MonoBehaviour
 
     public LayerMask layerMask;
 
-    public void InitObj(){
-        CheckNearSurroundings();
+    public bool Updating = false;
+
+    private GameObject[,] TheGrid;
+
+    private Vector2Int Coords;
+
+    private Vector2Int[] Offsets = new Vector2Int[4];
+
+    public bool[] NSEW;
+
+    public bool BlockPlaced = true;
+
+    public void InitObj(Vector2Int Coords, ref GameObject[,] TheGrid){
+        this.TheGrid = TheGrid;
+        this.Coords = Coords;
+
+        NSEW = new bool[4];
+        for (int i = 0; i < 4; i++)
+        {
+            NSEW[i] = false;
+        }
+
+        Offsets[0] = new Vector2Int(0, -1);
+        Offsets[1] = new Vector2Int(0, 1);
+        Offsets[2] = new Vector2Int(-1, 0);
+        Offsets[3] = new Vector2Int(1, 0);
+        PlaySoundPlaced();
     }
 
     void PlaySoundPlaced()
@@ -27,38 +52,33 @@ public class TileControlFunctions : MonoBehaviour
 
         audio.Play();
     }
+    /*
+    public void CheckNearSurroundings()
+    {
 
-    
-    private void CheckNearSurroundings(){
-        var HorizontalObjs = Physics.OverlapBox(transform.position, new Vector3(1f, 1f, .2f), Quaternion.identity, layerMask);
-        var VerticalObjs = Physics.OverlapBox(transform.position, new Vector3(.2f, 1f, 1f), Quaternion.identity, layerMask);
+        Updating = true;
 
-        foreach(var obj in HorizontalObjs){
-            if(obj != this){
-                var objController = obj.transform.parent.GetComponent<TileControlFunctions>();
-            if(obj.transform.position.x - transform.position.x < 0){
-                NSEW_Walls[2].SetActive(true);
-                objController.NSEW_Walls[3].SetActive(true);
+        for (int i = 0; i < 4; i++)
+        {
+            try
+            {
+                if (TheGrid[Coords.x + Offsets[i].x, Coords.y + Offsets[i].y].GetComponent<TileControlFunctions>().BlockPlaced != NSEW[i])
+                {
+                    NSEW[i] = !NSEW[i];
+
+                    NSEW_Walls[i].SetActive(NSEW[i]);
+
+                    if (!TheGrid[Coords.x + Offsets[i].x, Coords.y + Offsets[i].y].GetComponent<TileControlFunctions>().Updating)
+                    {
+                        TheGrid[Coords.x + Offsets[i].x, Coords.y + Offsets[i].y].GetComponent<TileControlFunctions>().CheckNearSurroundings();
+                    }
+                }
             }
-            else if(obj.transform.position.x - transform.position.x > 0){
-                NSEW_Walls[3].SetActive(true);
-                objController.NSEW_Walls[2].SetActive(true);
-            }
-            }
+            catch {}
+
         }
 
-        foreach(var obj in VerticalObjs){
-            if(obj != this){
-                var objController = obj.transform.parent.GetComponent<TileControlFunctions>();
-            if(obj.transform.position.z - transform.position.z < 0){
-                NSEW_Walls[0].SetActive(true);
-                objController.NSEW_Walls[1].SetActive(true);
-            }
-            else if(obj.transform.position.z - transform.position.z > 0){
-                NSEW_Walls[1].SetActive(true);
-                objController.NSEW_Walls[0].SetActive(true);
-            }
-            }
-        }
-    }
+        Updating = false;
+    }*/
+
 }
