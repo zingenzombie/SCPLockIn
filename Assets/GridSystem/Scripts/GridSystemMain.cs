@@ -39,12 +39,24 @@ public class GridSystemMain : MonoBehaviour
         surface.BuildNavMesh();
     }
 
+    void GridClick()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            PlaceWall();
+        }
+        else if (Input.GetMouseButton(1))
+        {
+            BreakWall();
+        }
+    }
 
     void FixedUpdate(){
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
-        {
+            {
+
                 int newXpoint = (int) Mathf.Ceil(hit.point.x) - 1;
                 int newYpoint = (int) Mathf.Ceil(hit.point.z) - 1;
                 if(newXpoint != xPoint){
@@ -55,6 +67,9 @@ public class GridSystemMain : MonoBehaviour
                     yPoint = newYpoint;
                     ChangeSelection();
                 }
+            //Debug.Log(hit.collider.gameObject.name);
+            if(hit.collider.gameObject.name == "Grid")
+                GridClick();
         }
         else
         {

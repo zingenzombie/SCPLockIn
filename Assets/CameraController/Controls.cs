@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Controlls : MonoBehaviour
+public class Controls : MonoBehaviour
 {
     [Header("Zoom Features")]
     [SerializeField] private float ZoomIntensity = 2.5f;
