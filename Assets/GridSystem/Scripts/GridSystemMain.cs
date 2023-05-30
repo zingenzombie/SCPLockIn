@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GridSystemMain : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class GridSystemMain : MonoBehaviour
 
     private Vector2Int[] Offsets = new Vector2Int[4];
 
+    public NavMeshSurface surface;
+
     void Awake()
     {
         TheGrid = new GameObject[GridSize.x, GridSize.y];
@@ -32,6 +35,8 @@ public class GridSystemMain : MonoBehaviour
         Offsets[1] = new Vector2Int(0, 1);
         Offsets[2] = new Vector2Int(-1, 0);
         Offsets[3] = new Vector2Int(1, 0);
+
+        surface.BuildNavMesh();
     }
 
 
