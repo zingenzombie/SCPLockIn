@@ -8,6 +8,10 @@ public class NPCNavMesh : MonoBehaviour
 
     [SerializeField] private Transform movePositionTransform;
     private NavMeshAgent navMeshAgent;
+    public GameObject Canvas;
+    public float defaultMovSpeed;
+    public float defaultAngularSpeed;
+    public float defaultAcceleration;
 
     private void Awake()
     {
@@ -16,6 +20,9 @@ public class NPCNavMesh : MonoBehaviour
 
     private void Update()
     {
+        this.GetComponent<NavMeshAgent>().speed = defaultMovSpeed * Canvas.GetComponent<TimeController>().TimeValue;
+        this.GetComponent<NavMeshAgent>().angularSpeed = defaultAngularSpeed * Canvas.GetComponent<TimeController>().TimeValue;
+        this.GetComponent<NavMeshAgent>().acceleration = defaultAcceleration * Canvas.GetComponent<TimeController>().TimeValue;
         navMeshAgent.destination = movePositionTransform.position;
     }
 }
